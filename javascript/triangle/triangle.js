@@ -16,7 +16,8 @@ class Triangle {
   }
 
   checkIsosceles(sides) {
-    return (sides[1] === sides[2]) ? true: false;
+    const uniqueSides = [...new Set(sides)]
+    return (sides.length > uniqueSides.length) ? true: false;
   }
 }
 
