@@ -4,15 +4,23 @@ class Triangle {
   }
 
   kind() {
-    if (this.validateSideLength(this.sides)) {
-      this.throwException();
-    }
+    this.validateTriangleInputs(this.sides);
     if (this.checkEqilateral(this.sides)) {
       return 'equilateral';
     } else if (this.checkIsosceles(this.sides)) {
       return 'isosceles';
     } else {
       return 'scalene';
+    }
+  }
+
+  validateTriangleInputs(sides) {
+    if (this.validateSideLength(sides)) {
+      this.throwException();
+    } else if (this.checkForInequality(sides)) {
+      this.throwException();
+    } else {
+      return true;
     }
   }
 
@@ -28,6 +36,15 @@ class Triangle {
   validateSideLength(sides) {
     const filteredSides = sides.filter(side => side <= 0);
     return filteredSides.length > 0 ? this.throwException() : false;
+  }
+
+  checkForInequality(sides) {
+    const sortedSides = sides.sort((a, b) => {
+      return a - b;
+    });
+    return sortedSides[0] + sortedSides[1] < sortedSides[2]
+      ? this.throwException()
+      : false;
   }
 
   throwException() {
