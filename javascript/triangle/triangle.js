@@ -8,6 +8,8 @@ class Triangle {
       return 'equilateral';
     } else if (this.checkIsosceles(this.sides)) {
       return 'isosceles';
+    } else {
+      return 'scalene';
     }
   }
 
