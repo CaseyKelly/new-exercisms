@@ -1,18 +1,22 @@
 class Triangle {
   constructor(sideA, sideB, sideC) {
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
+    this.sides = [sideA, sideB, sideC];
   }
 
   kind() {
-    return this.checkEqilateral(this.sideA, this.sideB, this.sideC)
+    if (this.checkEqilateral(this.sides)) {
+      return 'equilateral';
+    } else if (this.checkIsosceles(this.sides)) {
+      return 'isosceles';
+    }
   }
 
-  checkEqilateral(sideA, sideB, sideC) {
-    if ((sideA + sideB + sideC) / 3 === sideA) {
-      return 'equilateral';
-    }
+  checkEqilateral(sides) {
+    return (sides[0] + sides[1] + sides[2]) / 3 === sides[0] ? true : false;
+  }
+
+  checkIsosceles(sides) {
+    return (sides[1] === sides[2]) ? true: false;
   }
 }
 
