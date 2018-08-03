@@ -4,6 +4,9 @@ class Triangle {
   }
 
   kind() {
+    if (this.validateSideLength(this.sides)) {
+      this.throwException();
+    }
     if (this.checkEqilateral(this.sides)) {
       return 'equilateral';
     } else if (this.checkIsosceles(this.sides)) {
@@ -18,8 +21,17 @@ class Triangle {
   }
 
   checkIsosceles(sides) {
-    const uniqueSides = [...new Set(sides)]
-    return (sides.length > uniqueSides.length) ? true: false;
+    const uniqueSides = [...new Set(sides)];
+    return sides.length > uniqueSides.length ? true : false;
+  }
+
+  validateSideLength(sides) {
+    const filteredSides = sides.filter(side => side <= 0);
+    return filteredSides.length > 0 ? this.throwException() : false;
+  }
+
+  throwException() {
+    throw 'Sides must be a number greater than zero';
   }
 }
 
